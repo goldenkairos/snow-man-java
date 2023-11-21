@@ -1,5 +1,7 @@
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class SnowMan {
     private static final int SNOWMAN_MIN_WORD_LENGTH = 5;
@@ -29,6 +31,11 @@ public class SnowMan {
 
         boolean res = getWordProgress("HelloWord", wordMap);
         System.out.println(res);
+
+        ArrayList<Character> wrongGuessList = new ArrayList<>(Arrays.asList('b','c','a'));
+
+        String uInput = getLetterfromUser(wordMap, wrongGuessList);
+
 
     }
 
@@ -103,7 +110,7 @@ public class SnowMan {
     // that have been guessed incorrectly (wrong_guesses_list) as input.
     // It asks for input from the user of a single character until
     // a valid character is provided and then returns this character.
-    public static String getLetterfromUser(HashMap<Character, Boolean> snowmanHashMap, char[] wrongGuessArr){
+    public static String getLetterfromUser(HashMap<Character, Boolean> snowmanHashMap, ArrayList<Character> wrongGuessArr){
 
         boolean validInput = false;
         Scanner scanner = new Scanner(System.in);
@@ -132,7 +139,7 @@ public class SnowMan {
         return userInputString;
 }
 
-    public static boolean isCharinArr(char c, char[] arr) {
+    public static boolean isCharinArr(char c, ArrayList<Character> arr) {
         for (char ch : arr) {
             if (c == ch) {
                 return true;
