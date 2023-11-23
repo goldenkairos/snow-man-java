@@ -1,16 +1,14 @@
-
-// import org.apache.commons.lang3.RandomStringUtils;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
-import java.util.stream.Collector;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Random;
+import java.util.Scanner;
 import java.util.stream.Collectors;
+// import org.apache.commons.lang3.RandomStringUtils;
 //https://replit.com/@ViktoriiaZoloto/viktoriiasnowmanprojectC18#game.py
 
 public class SnowMan {
