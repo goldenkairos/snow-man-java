@@ -33,21 +33,21 @@ public class SnowMan {
 
     public static void main(String args[]) {
 
-        printSnowmanGraphic(5);
+        // printSnowmanGraphic(5);
 
-        HashMap<Character, Boolean> wordMap = buildWordDict("HelloWorld");
-        System.out.println(wordMap);
+        // HashMap<Character, Boolean> wordMap = buildWordDict("HelloWorld");
+        // System.out.println(wordMap);
 
-        wordMap.put('l', true);
-        wordMap.put('o', true);
-        System.out.println(wordMap);
+        // wordMap.put('l', true);
+        // wordMap.put('o', true);
+        // System.out.println(wordMap);
 
-        printWordProgressString("HelloWorld", wordMap);
+        // printWordProgressString("HelloWorld", wordMap);
 
-        boolean res = getWordProgress("HelloWord", wordMap);
-        System.out.println(res);
+        // boolean res = getWordProgress("HelloWord", wordMap);
+        // System.out.println(res);
 
-        ArrayList<Character> wrongGuessList = new ArrayList<>(Arrays.asList('b', 'c', 'a'));
+        // ArrayList<Character> wrongGuessList = new ArrayList<>(Arrays.asList('b', 'c', 'a'));
 
         // String uInput = getLetterfromUser(wordMap, wrongGuessList);
 
@@ -56,11 +56,39 @@ public class SnowMan {
 
         // System.out.println(Word);
 
-        String secretWord = getRandomWord(SNOWMAN_MIN_WORD_LENGTH, SNOWMAN_MAX_WORD_LENGTH);
-        System.out.println("Secret Word: " + secretWord);
+        Scanner scanner = new Scanner(System.in);
+        String snowManWord = getRandomWord(SNOWMAN_MIN_WORD_LENGTH, SNOWMAN_MAX_WORD_LENGTH);
+        System.out.println("Secret Word: " + snowManWord);
 
+        snowMan(snowManWord);
+        scanner.close();
     }
 
+    public static void snowMan(String snowManWord) {
+        
+        HashMap<Character, Boolean> snowManWordMap = buildWordDict(snowManWord);
+        System.out.println(snowManWordMap);
+        ArrayList<Character> wrongGuessList = new ArrayList<>();
+        boolean continueGuess = true;
+
+        while (wrongGuessList.size() <= SNOWMAN_MAX_WRONG_GUESSES && continueGuess){
+            Character userInput = getLetterfromUser(snowManWordMap, wrongGuessList);
+
+            if (snowManWordMap.containsKey(userInput)){
+                snowManWordMap.put(userInput,true);
+            } else {
+                wrongGuessList.add(userInput);
+            }
+
+            if (getWordProgress(snowManWord,snowManWordMap)){
+                System.out.println("Congratulations, you win!");
+                continueGuess = false;
+            } else if (wrongGuessList.size() == SNOWMAN_MAX_WRONG_GUESSES){
+                System.out.println("Sorry, you lose! The word is "+ snowManWord);
+            }
+
+        }
+    }
     // This method is designed to load words from words.txt
     private static List<String> loadWordsFromFile() {
         List<String> words = new ArrayList<>();
@@ -159,6 +187,7 @@ public class SnowMan {
                 return false;
             }
         }
+        
         return true;
     }
 
@@ -166,7 +195,7 @@ public class SnowMan {
     // that have been guessed incorrectly (wrong_guesses_list) as input.
     // It asks for input from the user of a single character until
     // a valid character is provided and then returns this character.
-    public static String getLetterfromUser(HashMap<Character, Boolean> snowmanHashMap,
+    public static Character getLetterfromUser(HashMap<Character, Boolean> snowmanHashMap,
             ArrayList<Character> wrongGuessArr) {
 
         boolean validInput = false;
@@ -192,8 +221,7 @@ public class SnowMan {
                 }
             }
         }
-        scanner.close();
-        return userInputString;
+        return Character.toLowerCase(userInputString.charAt(0));
     }
 
     public static boolean isCharinArr(char c, ArrayList<Character> arr) {
