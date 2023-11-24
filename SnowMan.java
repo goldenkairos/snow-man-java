@@ -22,7 +22,7 @@ public class SnowMan {
     private static final String SNOWMAN_4 = "   * (\")    *";
     private static final String SNOWMAN_5 = "*  \\( : )/ *";
     private static final String SNOWMAN_6 = "  *(_ : _)  *";
-    private static final String SNOWMAN_7 = "-----------";
+    private static final String SNOWMAN_7 = "--------------";
 
     private static final String WORDS_FILE_PATH = "words.txt";
     private static List<String> WORDS;
@@ -58,7 +58,7 @@ public class SnowMan {
 
         Scanner scanner = new Scanner(System.in);
         String snowManWord = getRandomWord(SNOWMAN_MIN_WORD_LENGTH, SNOWMAN_MAX_WORD_LENGTH);
-        System.out.println("Secret Word: " + snowManWord);
+        // System.out.println("Secret Word: " + snowManWord);
 
         snowMan(snowManWord);
         scanner.close();
@@ -67,7 +67,6 @@ public class SnowMan {
     public static void snowMan(String snowManWord) {
         
         HashMap<Character, Boolean> snowManWordMap = buildWordDict(snowManWord);
-        System.out.println(snowManWordMap);
         ArrayList<Character> wrongGuessList = new ArrayList<>();
         boolean continueGuess = true;
 
@@ -76,15 +75,21 @@ public class SnowMan {
 
             if (snowManWordMap.containsKey(userInput)){
                 snowManWordMap.put(userInput,true);
+                // System.out.println("You guessed a letter that's in the world!");
             } else {
                 wrongGuessList.add(userInput);
+                System.out.println("The letter is not in the word");
             }
+            printSnowmanGraphic(wrongGuessList.size());
+            printWordProgressString(snowManWord, snowManWordMap);
+            printWrongGuessList(wrongGuessList);
 
             if (getWordProgress(snowManWord,snowManWordMap)){
                 System.out.println("Congratulations, you win!");
                 continueGuess = false;
             } else if (wrongGuessList.size() == SNOWMAN_MAX_WRONG_GUESSES){
                 System.out.println("Sorry, you lose! The word is "+ snowManWord);
+                continueGuess = false;
             }
 
         }
@@ -130,22 +135,22 @@ public class SnowMan {
         StringBuilder graphic = new StringBuilder();
         for (int i = 1; i <= numWrongGuesses; i++) {
             if (i == 1) {
-                graphic.append(SNOWMAN_1);
+                // graphic.append(SNOWMAN_1);
+                System.out.println(SNOWMAN_1);
             } else if (i == 2) {
-                graphic.append(SNOWMAN_2);
+                System.out.println(SNOWMAN_2);
             } else if (i == 3) {
-                graphic.append(SNOWMAN_3);
+                System.out.println(SNOWMAN_3);
             } else if (i == 4) {
-                graphic.append(SNOWMAN_4);
+                System.out.println(SNOWMAN_4);
             } else if (i == 5) {
-                graphic.append(SNOWMAN_5);
+                System.out.println(SNOWMAN_5);
             } else if (i == 6) {
-                graphic.append(SNOWMAN_6);
+                System.out.println(SNOWMAN_6);
             } else if (i == 7) {
-                graphic.append(SNOWMAN_7);
+                System.out.println(SNOWMAN_7);
             }
         }
-        System.out.println(graphic);
     }
 
     // This function takes snowmanWord string as input and returns
@@ -169,9 +174,9 @@ public class SnowMan {
 
         for (char letter : snowmanWord.toCharArray()) {
             if (snowmanHashMap.get(letter)) {
-                progressString.append(letter);
+                progressString.append(letter + " ");
             } else {
-                progressString.append("_");
+                progressString.append("_ ");
             }
         }
         System.out.println(progressString);
@@ -233,4 +238,13 @@ public class SnowMan {
         return false;
     }
 
+    public static void printWrongGuessList(ArrayList<Character> wrongGuessList){
+        String guesses = "";
+        System.out.println("Wrong guesses: ");
+
+        for (char guess: wrongGuessList){
+            guesses+=guess + " ";
+        }
+        System.err.println(guesses);
+    }
 }
