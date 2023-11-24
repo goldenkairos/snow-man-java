@@ -2,14 +2,11 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.stream.Collectors;
-// import org.apache.commons.lang3.RandomStringUtils;
-//https://replit.com/@ViktoriiaZoloto/viktoriiasnowmanprojectC18#game.py
 
 public class SnowMan {
     private static final int SNOWMAN_MIN_WORD_LENGTH = 5;
@@ -33,32 +30,8 @@ public class SnowMan {
 
     public static void main(String args[]) {
 
-        // printSnowmanGraphic(5);
-
-        // HashMap<Character, Boolean> wordMap = buildWordDict("HelloWorld");
-        // System.out.println(wordMap);
-
-        // wordMap.put('l', true);
-        // wordMap.put('o', true);
-        // System.out.println(wordMap);
-
-        // printWordProgressString("HelloWorld", wordMap);
-
-        // boolean res = getWordProgress("HelloWord", wordMap);
-        // System.out.println(res);
-
-        // ArrayList<Character> wrongGuessList = new ArrayList<>(Arrays.asList('b', 'c', 'a'));
-
-        // String uInput = getLetterfromUser(wordMap, wrongGuessList);
-
-        // String Word =
-        // snowmanWordGenerator(SNOWMAN_MIN_WORD_LENGTH,SNOWMAN_MAX_WORD_LENGTH);
-
-        // System.out.println(Word);
-
         Scanner scanner = new Scanner(System.in);
         String snowManWord = getRandomWord(SNOWMAN_MIN_WORD_LENGTH, SNOWMAN_MAX_WORD_LENGTH);
-        // System.out.println("Secret Word: " + snowManWord);
 
         snowMan(snowManWord);
         scanner.close();
@@ -75,7 +48,7 @@ public class SnowMan {
 
             if (snowManWordMap.containsKey(userInput)){
                 snowManWordMap.put(userInput,true);
-                // System.out.println("You guessed a letter that's in the world!");
+                System.out.println("You guessed a letter!");
             } else {
                 wrongGuessList.add(userInput);
                 System.out.println("The letter is not in the word");
