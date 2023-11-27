@@ -28,7 +28,7 @@ public class SnowMan {
         WORDS = loadWordsFromFile();
     }
 
-    public static void main(String args[]) {
+    public static void StartGame() {
 
         Scanner scanner = new Scanner(System.in);
         String snowManWord = getRandomWord(SNOWMAN_MIN_WORD_LENGTH, SNOWMAN_MAX_WORD_LENGTH);
@@ -37,7 +37,7 @@ public class SnowMan {
         scanner.close();
     }
 
-    public static void snowMan(String snowManWord) {
+    static void snowMan(String snowManWord) {
         
         HashMap<Character, Boolean> snowManWordMap = buildWordDict(snowManWord);
         ArrayList<Character> wrongGuessList = new ArrayList<>();
@@ -186,7 +186,7 @@ public class SnowMan {
 
             if (userInputString.length() > 1) {
                 System.out.println("You must only enter 1 letter at a time!");
-            } else if (userInputString.length() == 1) {
+            } else {
                 char userInputChar = Character.toLowerCase(userInputString.charAt(0));
                 if (!Character.isLetter(userInputChar)) {
                     System.out.println("You must input a letter!");
