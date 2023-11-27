@@ -181,7 +181,7 @@ public class SnowMan {
         String userInputString = "";
 
         while (!validInput) {
-            System.out.println("Guess a letter: ");
+            System.out.println("Guess a letter (Press Ctrl + C to exit the game): ");
             userInputString = scanner.nextLine();
 
             if (userInputString.length() > 1) {
